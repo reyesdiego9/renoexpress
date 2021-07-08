@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table';
-import { Modal, TextField, Button, Input  } from '@material-ui/core';
+import { Modal, TextField, Button  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
+import validarNIT from 'validar-nit-gt'
 
 
 const useStyle = makeStyles((theme) => ({
@@ -33,6 +34,7 @@ function Lista() {
     const [insertar, setInsertar] = useState(false);
     const [mostrarDatos, setmostrarDatos] = useState([]);
     const [modalDatos, setmodalDatos] = useState(false);
+
     var today = new Date(),
     date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     const [productoSeleccionado, setproductoSeleccionado] = useState({
@@ -74,7 +76,26 @@ function Lista() {
     const peticionPost = async() => {
         await axios.post("http://localhost:5001/articulos", productoSeleccionado)
         .then(response => {
-            setData(data.concat(response.data));
+            if(response.data.nombre.length <= 0
+            || response.data.proveedor.length <= 0
+            || response.data.nit.length <= 0
+            || response.data.direccion.length <= 0
+            || response.data.codigo_producto.length <= 0
+            || response.data.marca.length <= 0
+            || response.data.cantidad.length <= 0
+            || response.data.descripcion.length <= 0
+            || response.data.precio_unitario.length <= 0
+            || response.data.fecha_abastecimiento.length <= 0){
+                    alert("No puede haber ninguna casilla vacia!")
+            }else{
+                if (!validarNIT(response.data.nit)) {
+                    alert("Nit no valido!")
+                }else{
+                    setData(data.concat(response.data));
+                    abrirCerrarModalInsertar();
+                }
+            }
+            
         })
     }
 
@@ -94,16 +115,16 @@ function Lista() {
     const agregarCompra = (
         <div className={styles.modal}>
             <h3>Compra de Producto</h3>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="nombre" placeholder="Nombre"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="proveedor" placeholder="Proveedor"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="nit" placeholder="Nit"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="direccion" placeholder="Dirección"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="categoria" placeholder="Categoria"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="codigo_producto" placeholder="Codigo del Producto"></TextField>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="marca" placeholder="Marca"></TextField><br></br>
-            <TextField className={styles.inputMaterial} onChange={handleChange} name="descripcion" placeholder="Descripción"></TextField><br></br>
-            <Input className={styles.inputMaterial} onChange={handleChange} name="cantidad" placeholder="Cantidad" type="number"></Input><br></br>
-            <Input className={styles.inputMaterial} onChange={handleChange} name="precio_unitario" placeholder="Precio Unitario" type="number"></Input><br></br>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="nombre" label="Nombre" required></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="proveedor" label="Proveedor"></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="nit" label="Nit"></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="direccion" label="Dirección"></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="categoria" label="Categoria"></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="codigo_producto" label="Codigo del Producto"></TextField>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="marca" label="Marca"></TextField><br></br>
+            <TextField className={styles.inputMaterial} onChange={handleChange} name="descripcion" label="Descripción"></TextField><br></br>
+            <TextField className={styles.inputMaterial} type="number" onChange={handleChange} name="cantidad" label="Cantidad" type="number"></TextField><br></br>
+            <TextField className={styles.inputMaterial} type="number" onChange={handleChange} name="precio_unitario" label="Precio Unitario" type="number"></TextField><br></br>
             <div align="right">
                 <Button color="primary" onClick={() => peticionPost()}>Insertar</Button>
                 <Button onClick={() => abrirCerrarModalInsertar()} color="primary">Cancelar</Button>
@@ -114,13 +135,13 @@ function Lista() {
     const mostrarDatosProductos = (
         <div className={styles.modal}>
             <h2>Producto</h2>
-            <p>{mostrarDatos.nombre}</p>
-            <p>{mostrarDatos.descripcion}</p>
-            <p>{mostrarDatos.codigo_producto}</p>
-            <p>{mostrarDatos.precio_unitario}</p>
-            <p>{mostrarDatos.cantidad_total}</p>
-            <p>{mostrarDatos.fecha_abastecimiento}</p>
-            <p>{mostrarDatos.cantidad}</p>
+            <p>Nombre del Produto: {mostrarDatos.nombre}</p>
+            <p>Descripción: {mostrarDatos.descripcion}</p>
+            <p>Codigo: {mostrarDatos.codigo_producto}</p>
+            <p>Precio Unitario: {mostrarDatos.precio_unitario}</p>
+            <p>Cantidad: {mostrarDatos.cantidad_total}</p>
+            <p>Fecha de abastecimiento: {mostrarDatos.fecha_abastecimiento}</p>
+            <p>Cantidad adquirida en el último abastecimiento: {mostrarDatos.cantidad}</p>
             <div align="right">
                 <Button onClick={() => abrirCerrarModalDatos()} color="primary">Cancelar</Button>
             </div>
@@ -143,33 +164,19 @@ function Lista() {
             field: "categoria"
         }
     ]
-
+    const totalCantidadProductos = data.reduce((sum, value) => ( sum + parseInt(value.cantidad) ), 0);
+    const totalPrecio = data.reduce((sum, value) => ( sum + parseInt(value.precio_unitario) ), 0);
+    const promedio = (totalPrecio / totalCantidadProductos).toFixed(2)
     return (
         <div className="contenedor">
+            <p>Cantidad de Juguetes Totales: {totalCantidadProductos}</p>
+            <p>Total: Q.{totalPrecio}</p>
+            <p>Promedio de precio unitario: Q.{promedio}</p>
             <Button onClick={() => abrirCerrarModalInsertar()} className='botones'>Transaccion</Button>
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Código</th>
-                        <th>Categoría</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {productos.map(
-                        (producto) => {
-                            <tr key={producto.id}>
-                                <td>producto.nombre</td>
-                                <td>producto.codigo_producto</td>
-                                <td>producto.categoria</td>
-                            </tr>
-                        }
-                    )}
-                </tbody>
-            </table> */}
             <MaterialTable
                 columns={columnas}
                 data={data}
+                title = "Productos"
                 actions = {[
                     {
                         icon: 'search',
@@ -178,9 +185,10 @@ function Lista() {
                     }
                 ]}
                 options = {{
-                    actionsColumnIndex: -1
+                    actionsColumnIndex: -1,
+                    paging: false
                 }}
-            ></MaterialTable>
+            />
 
             <Modal
                 open={insertar}
