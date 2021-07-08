@@ -23,7 +23,7 @@ function App() {
         </div>
       </nav>
       <Route exact path='/' component={ Lista }></Route>
-      <Route exact path='/compra' component={ Transaccion }></Route>
+      <Route exact path='/transaccion' component={ Transaccion }></Route>
     
     </Router>
   );

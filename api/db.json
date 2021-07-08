@@ -18,13 +18,13 @@
     {
       "nombre": "Prueba2",
       "proveedor": "Prueba2",
-      "nit": "",
+      "nit": "26031833",
       "direccion": "Prueba2",
       "codigo_producto": "Prueba2",
       "marca": "Prueba2",
-      "cantidad": "40",
+      "cantidad": "20",
       "descripcion": "Prueba2",
-      "precio_unitario": "5.20",
+      "precio_unitario": "25",
       "fecha_abastecimiento": "8-7-2021",
       "categoria": "Prueba2",
       "id": 2
@@ -32,30 +32,16 @@
     {
       "nombre": "Prueba3",
       "proveedor": "Prueba3",
-      "nit": "25784455",
+      "nit": "25706950",
       "direccion": "Prueba3",
       "codigo_producto": "Prueba3",
       "marca": "Prueba3",
-      "cantidad": "56",
+      "cantidad": "20",
       "descripcion": "Prueba3",
-      "precio_unitario": "1.30",
+      "precio_unitario": "21",
       "fecha_abastecimiento": "8-7-2021",
       "categoria": "Prueba3",
       "id": 3
-    },
-    {
-      "nombre": "Prueba4",
-      "proveedor": "Prueba4",
-      "nit": "26031833",
-      "direccion": "Prueba4",
-      "codigo_producto": "Prueba4",
-      "marca": "Prueba4",
-      "cantidad": "30",
-      "descripcion": "Prueba4",
-      "precio_unitario": "4.5",
-      "fecha_abastecimiento": "8-7-2021",
-      "categoria": "Prueba4",
-      "id": 4
     }
   ]
 }
