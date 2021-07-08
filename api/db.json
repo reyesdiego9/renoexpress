@@ -22,6 +22,7 @@
       "direccion": "Prueba2",
       "codigo_producto": "Prueba2",
       "marca": "Prueba2",
+      "cantidad_total": "5",
       "cantidad": "20",
       "descripcion": "Prueba2",
       "precio_unitario": "25",
@@ -36,12 +37,43 @@
       "direccion": "Prueba3",
       "codigo_producto": "Prueba3",
       "marca": "Prueba3",
+      "cantidad_total": "5",
       "cantidad": "20",
       "descripcion": "Prueba3",
       "precio_unitario": "21",
       "fecha_abastecimiento": "8-7-2021",
       "categoria": "Prueba3",
       "id": 3
+    },
+    {
+      "nombre": "Prueba5",
+      "proveedor": "Prueba5",
+      "nit": "847268-8",
+      "direccion": "Prueba5",
+      "codigo_producto": "A1",
+      "marca": "Prueba5",
+      "cantidad_total": "5",
+      "cantidad": "30",
+      "descripcion": "Prueba5",
+      "precio_unitario": "3.5",
+      "fecha_abastecimiento": "8-7-2021",
+      "categoria": "Prueba5",
+      "id": 4
+    },
+    {
+      "nombre": "Prueba8",
+      "proveedor": "Prueba8",
+      "nit": "544543534544",
+      "direccion": "Prueba8",
+      "codigo_producto": "Prueba8",
+      "marca": "Prueba8",
+      "cantidad_total": "43",
+      "cantidad": "43",
+      "descripcion": "Prueba8",
+      "precio_unitario": "3.5",
+      "fecha_abastecimiento": "8-7-2021",
+      "categoria": "Prueba8",
+      "id": 5
     }
   ]
 }

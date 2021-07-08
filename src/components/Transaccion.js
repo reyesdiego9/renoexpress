@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { TextField, Button  } from '@material-ui/core';
+import { TextField, Button, Select  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import validarNIT from 'validar-nit-gt'
@@ -33,6 +33,9 @@ function Transaccion() {
         var today = new Date(),
         date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
         const [data, setData] = useState([]);
+        const [total, settotal] = useState(0);
+        const [precio, setprecio] = useState(0);
+        const [quantity, setquantity] = useState(0)
         const [formulario, setFormulario] = useState('false');
         const [productoSeleccionado, setproductoSeleccionado] = useState({
             "nombre": "",
@@ -41,25 +44,72 @@ function Transaccion() {
             "direccion": "",
             "codigo_producto": "",
             "marca": "",
+            "cantidad_total": "",
             "cantidad": 0,
             "descripcion": "",
             "precio_unitario": 0,
             "fecha_abastecimiento": date    
         });
 
+        const [ventaProducto, setventaProducto] = useState({
+            "nombreCliente": "", 
+            "nit": "",
+            "direccion": "",
+            "Producto": "",
+            "cantidad": "",
+            "total":""
+        })
+
+        
+        const cargarDatos = async() => {
+            await axios.get("http://localhost:5001/articulos")
+            .then(response => {
+                setData(response.data)
+            })
+        }
+
+        useEffect(() => {
+            cargarDatos();
+        }, [])
+
         const cambiarFormulario = function (e) {
             const ff = e.target.value;
             setFormulario(!formulario)
         }
-
+ 
         const handleChange = e => {
             const {name, value} = e.target;
             setproductoSeleccionado(prevState => ({
                 ...prevState,
-                [name]: value
+                [name]: value,
+                "cantidad_total": productoSeleccionado.cantidad
             }));
 
             console.log(productoSeleccionado)
+        }
+
+        const precioProducto = (data) => {
+
+            setprecio(data.props.value.precio_unitario)
+            setquantity(data.props.value.cantidad);
+            setventaProducto(prevState => ({
+                ...prevState,
+                "Producto": data.props.value.nombre
+            }))
+            console.log(data.props.value.precio_unitario);
+        }
+
+        const handleQuantity = e => {
+            const { name, value } = e.target;
+            if(name == "cantidad"){
+                const total = value * parseFloat(precio)
+                settotal(total)
+            }
+            setventaProducto(prevState => ({
+                ...prevState,
+                [name]: value
+            }))
+            console.log(ventaProducto);
         }
 
         const peticionPost = async() => {
@@ -81,6 +131,27 @@ function Transaccion() {
                     await axios.post("http://localhost:5001/articulos", productoSeleccionado)
                     .then(response => {
                         setData(data.concat(response.data));
+                        history.push('/');
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                }
+            }
+        }
+
+        const venta = async() => {
+            if(ventaProducto.nombreCliente.length <= 0
+                || ventaProducto.nit.length <= 0
+                || ventaProducto.direccion.length <= 0
+                || ventaProducto.Producto.length <= 0
+                || ventaProducto.cantidad.length <= 0){
+                alert("No puede haber ninguna casilla vacia!")
+            }else{
+                if (!validarNIT(ventaProducto.nit)) {
+                    alert("Nit no valido!")
+                }else{
+                    await axios.get("http://localhost:5001/articulos", productoSeleccionado)
+                    .then(response => {
                         history.push('/');
                     }).catch(error => {
                         console.log(error)
@@ -124,16 +195,26 @@ function Transaccion() {
                         <option value='true'>Compra</option>
                         <option value='false'>Venta</option>
                     </select>
-                    <div>
-                        <select>
+                    <div className={styles.modal}>
+                        <h3>Venta de Producto</h3>
+                        <TextField className={styles.inputMaterial} onChange={handleQuantity} name="nombreCliente" label="Cliente" required></TextField>
+                        <TextField className={styles.inputMaterial} onChange={handleQuantity} name="nit" label="Nit" required></TextField>
+                        <TextField className={styles.inputMaterial} onChange={handleQuantity} name="direccion" label="Dirección" required></TextField>
+
+                        <TextField onChange={(event, rowData) => precioProducto(rowData) } select className={styles.inputMaterial} label="Produtcto" >
                             {data.map(
                                 (dato) => (
-                                    <option key={dato.codigo_producto}>{dato.nombre}</option>
+                                    <option name="Producto" key={dato.id} value={dato}>{dato.nombre}</option>
                                 )
                             )
 
                             }
-                        </select>
+                        </TextField>
+                        <TextField className={styles.inputMaterial} type="number" inputProps={{ min: 0, max: parseInt(quantity) }} onChange={handleQuantity} name="cantidad" label="Cantidad" required></TextField>
+                        <TextField className={styles.inputMaterial} name="total" onChange={handleQuantity} value={total} disabled>{total}</TextField>
+                        <div align="right">
+                            <Button color="primary" onClick={() => venta()}>Vender</Button>
+                        </div>
                     </div>
                 </div>
              );

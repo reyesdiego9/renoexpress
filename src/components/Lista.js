@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import MaterialTable from 'material-table';
-import { Modal, TextField, Button  } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
-import axios from 'axios';
-import validarNIT from 'validar-nit-gt'
-import { Link } from "react-router-dom";
+import MaterialTable from 'material-table'
+import { Modal, TextField, Button  } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
+import axios from 'axios'
+import { Link } from "react-router-dom"
 
 
 const useStyle = makeStyles((theme) => ({
@@ -105,11 +104,11 @@ function Lista() {
             <p>Promedio de precio unitario: Q.{promedio}</p>
             <Link to={{
                 pathname:  "/transaccion",
-                data: {data}
+                data: data
             }} className='botones'>transaccion</Link>
             <MaterialTable
                 columns={columnas}
-                data={mostrarDatos}
+                data={data}
                 title = "Productos"
                 actions = {[
                     {
