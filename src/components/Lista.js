@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
-import { Modal, TextField, Button  } from '@material-ui/core'
+import { Modal, Button  } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import axios from 'axios'
 import { Link } from "react-router-dom"
@@ -31,7 +31,6 @@ const useStyle = makeStyles((theme) => ({
 function Lista() {
     const styles = useStyle();
     const [data, setData] = useState([]);
-    const [insertar, setInsertar] = useState(false);
     const [mostrarDatos, setmostrarDatos] = useState([]);
     const [modalDatos, setmodalDatos] = useState(false);
 
@@ -94,6 +93,7 @@ function Lista() {
             field: "categoria"
         }
     ]
+    
     const totalCantidadProductos = data.reduce((sum, value) => ( sum + parseInt(value.cantidad) ), 0);
     const totalPrecio = data.reduce((sum, value) => ( sum + parseInt(value.precio_unitario) ), 0);
     const promedio = (totalPrecio / totalCantidadProductos).toFixed(2)

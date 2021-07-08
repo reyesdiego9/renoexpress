@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { TextField, Button, Select  } from '@material-ui/core';
+import { TextField, Button  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import validarNIT from 'validar-nit-gt'

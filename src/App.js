@@ -1,9 +1,9 @@
-import estilos from './style/style.scss';
 import Logo from './img/logo.svg';
 import Lista from './components/Lista';
 import Transaccion from './components/Transaccion';
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
+import estilos from './style/style.scss';
 
 
 function App() {
