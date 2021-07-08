@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import estilos from './style/style.scss';
+import Logo from './img/logo.svg';
+import Lista from './components/Lista';
+import Transaccion from './components/Transaccion';
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* <Route exact path='/' component={ Lista }></Route> */}
+      <nav className="navbar">
+        <div className="navbar__container">
+          <img src={ Logo } className="logo"></img>
+          <Link to={"/"} className="inicio">
+            <h1>Renoexpress</h1>
+          </Link>
+          
+          {/* <Link to={"/"}>Sistema</Link>
+          <Link to={"/compra"}>Compra</Link>
+          <Link to={"/venta"}>Ventas</Link> */}
+        </div>
+      </nav>
+      <Route exact path='/' component={ Lista }></Route>
+      <Route exact path='/compra' component={ Transaccion }></Route>
+    
+    </Router>
   );
 }
 

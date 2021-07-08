@@ -1,0 +1,91 @@
+{
+  "articulos": [
+    {
+      "proveedor": "AAAA",
+      "nit": "12345",
+      "direccion": "lorem ipsum",
+      "categoria": "lorem ipsum",
+      "codigo_producto": "A2",
+      "nombre": "lorem",
+      "marca": "lorem ipsum",
+      "cantidad": "5",
+      "cantidad_total": "5",
+      "descripcion": "lorem ipsum",
+      "precio_unitario": "20",
+      "fecha_abastecimiento": "7-7-2021",
+      "id": 1
+    },
+    {
+      "proveedor": "BBBB",
+      "nit": "12345",
+      "direccion": "lorem ipsum",
+      "categoria": "lorem ipsum",
+      "codigo_producto": "A2",
+      "nombre": "AAA",
+      "marca": "lorem ipsum",
+      "cantidad": "5",
+      "cantidad_total": "5",
+      "descripcion": "lorem ipsum",
+      "precio_unitario": "20",
+      "fecha_abastecimiento": "7-7-2021",
+      "id": 2
+    },
+    {
+      "proveedor": "CCCC",
+      "nit": "12345",
+      "direccion": "lorem ipsum",
+      "categoria": "lorem ipsum",
+      "codigo_producto": "A2",
+      "nombre": "BBB",
+      "marca": "lorem ipsum",
+      "cantidad": "5",
+      "cantidad_total": "5",
+      "descripcion": "lorem ipsum",
+      "precio_unitario": "20",
+      "fecha_abastecimiento": "7-7-2021",
+      "id": 3
+    },
+    {
+      "proveedor": "DDDD",
+      "nit": "12345",
+      "direccion": "lorem ipsum",
+      "categoria": "lorem ipsum",
+      "codigo_producto": "A2",
+      "nombre": "CCC",
+      "marca": "lorem ipsum",
+      "cantidad": "5",
+      "cantidad_total": "5",
+      "descripcion": "lorem ipsum",
+      "precio_unitario": "20",
+      "fecha_abastecimiento": "7-7-2021",
+      "id": 4
+    },
+    {
+      "proveedor": "prueba",
+      "nit": "12345",
+      "direccion": "Condominio Hacienda de las flores, sector 4 casa 49",
+      "codigo_producto": "fdsa",
+      "marca": "lorem ipsum",
+      "cantidad": "4",
+      "descripcion": "lorem ipsum",
+      "precio_unitario": "20",
+      "fecha_abastecimiento": "7-7-2021",
+      "categoria": "lorem ipsum",
+      "id": 5
+    },
+    {
+      "nombre": "Carro Hummer",
+      "proveedor": "Hot wheels",
+      "nit": "12356",
+      "direccion": "kfjdklkfjadsllkfj",
+      "codigo_producto": "A52",
+      "marca": "Hot Wheels",
+      "cantidad": "10",
+      "descripcion": "Es un carro hummer de juguete",
+      "precio_unitario": "40",
+      "fecha_abastecimiento": "7-7-2021",
+      "categoria": "Carros",
+      "id": 6
+    }
+  ]
+}
