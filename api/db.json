@@ -74,6 +74,21 @@
       "fecha_abastecimiento": "8-7-2021",
       "categoria": "Prueba8",
       "id": 5
+    },
+    {
+      "nombre": "Diego",
+      "proveedor": "Diego",
+      "nit": "25706950",
+      "direccion": "Diego",
+      "codigo_producto": "0Diego",
+      "marca": "Diego",
+      "cantidad_total": "456",
+      "cantidad": "456",
+      "descripcion": "Diego",
+      "precio_unitario": "43",
+      "fecha_abastecimiento": "8-7-2021",
+      "categoria": "Diego",
+      "id": 6
     }
   ]
 }

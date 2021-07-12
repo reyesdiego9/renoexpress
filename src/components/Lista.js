@@ -30,6 +30,7 @@ const useStyle = makeStyles((theme) => ({
 
 function Lista() {
     const styles = useStyle();
+
     const [data, setData] = useState([]);
     const [mostrarDatos, setmostrarDatos] = useState([]);
     const [modalDatos, setmodalDatos] = useState(false);
@@ -37,12 +38,23 @@ function Lista() {
 
 
     const cargarDatos = async() => {
-        await axios.get("http://localhost:5001/articulos")
-        .then(response => {
-            setData(response.data)
-        })
+        let url = "http://localhost:5001/articulos"
+        const api = new XMLHttpRequest()
+        
+        api.open('GET', url, true)
+        api.send();
+
+        api.onreadystatechange =  await function() {
+            if(this.status === 200 && this.readyState === 4){
+                let datos = JSON.parse(this.responseText)
+                setData(datos)
+            }
+        }
     }
 
+    useEffect(() => {
+        cargarDatos();
+    }, [])
 
     const datosProducto = (datos) => {
         setmostrarDatos(datos)
@@ -56,9 +68,6 @@ function Lista() {
     }
 
 
-    useEffect(() => {
-        cargarDatos();
-    }, [])
 
 
     const mostrarDatosProductos = (
@@ -77,8 +86,6 @@ function Lista() {
         </div>
     )
         
-
-    // const{datosCargado, productos} = this.state
     const columnas = [
         {
             title: "Nombre",
@@ -103,8 +110,7 @@ function Lista() {
             <p>Total: Q.{totalPrecio}</p>
             <p>Promedio de precio unitario: Q.{promedio}</p>
             <Link to={{
-                pathname:  "/transaccion",
-                data: data
+                pathname:  "/transaccion"
             }} className='botones'>transaccion</Link>
             <MaterialTable
                 columns={columnas}

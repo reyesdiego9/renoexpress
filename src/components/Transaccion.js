@@ -36,7 +36,7 @@ function Transaccion() {
         const [total, settotal] = useState(0);
         const [precio, setprecio] = useState(0);
         const [quantity, setquantity] = useState(0)
-        const [formulario, setFormulario] = useState('false');
+        const [formulario, setFormulario] = useState(false);
         const [productoSeleccionado, setproductoSeleccionado] = useState({
             "nombre": "",
             "proveedor": "",
@@ -73,7 +73,6 @@ function Transaccion() {
         }, [])
 
         const cambiarFormulario = function (e) {
-            const ff = e.target.value;
             setFormulario(!formulario)
         }
  
@@ -101,14 +100,11 @@ function Transaccion() {
 
         const handleQuantity = e => {
             const { name, value } = e.target;
-            if(name == "cantidad"){
+            if(name === "cantidad"){
                 const total = value * parseFloat(precio)
                 settotal(total)
             }
-            setventaProducto(prevState => ({
-                ...prevState,
-                [name]: value
-            }))
+
             console.log(ventaProducto);
         }
 
@@ -163,7 +159,7 @@ function Transaccion() {
         if(formulario){
             return (
                 <div className="contenedor">
-                    <Link  to={"/"}>Cancelar</Link>
+                    <Link  to={"/"} className="cancelar">Cancelar</Link>
                     <select onChange={cambiarFormulario} className='seleccionarFormulario'>
                         <option value='true'>Compra</option>
                         <option value='false'>Venta</option>
@@ -178,10 +174,10 @@ function Transaccion() {
                         <TextField className={styles.inputMaterial} onChange={handleChange} name="codigo_producto" label="Codigo del Producto"></TextField>
                         <TextField className={styles.inputMaterial} onChange={handleChange} name="marca" label="Marca"></TextField><br></br>
                         <TextField className={styles.inputMaterial} onChange={handleChange} name="descripcion" label="Descripción"></TextField><br></br>
-                        <TextField className={styles.inputMaterial} type="number" onChange={handleChange} name="cantidad" label="Cantidad" type="number"></TextField><br></br>
-                        <TextField className={styles.inputMaterial} type="number" onChange={handleChange} name="precio_unitario" label="Precio Unitario" type="number"></TextField><br></br>
+                        <TextField className={styles.inputMaterial} onChange={handleChange} name="cantidad" label="Cantidad" type="number"></TextField><br></br>
+                        <TextField className={styles.inputMaterial} onChange={handleChange} name="precio_unitario" label="Precio Unitario" type="number"></TextField><br></br>
                         <div align="right">
-                            <Button color="primary" onClick={() => peticionPost()}>Insertar</Button>
+                            <Button className="botones" onClick={() => peticionPost()}>Insertar</Button>
                         </div>
                     </div>
                 </div>
@@ -190,7 +186,7 @@ function Transaccion() {
             console.log(data)
             return ( 
                 <div className="contenedor">
-                    <Link  to={"/"}>Cancelar</Link>
+                    <Link  to={"/"}  className="cancelar">Cancelar</Link>
                     <select onChange={cambiarFormulario} className='seleccionarFormulario'>
                         <option value='true'>Compra</option>
                         <option value='false'>Venta</option>
