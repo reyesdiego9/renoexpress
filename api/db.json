@@ -89,6 +89,21 @@
       "fecha_abastecimiento": "8-7-2021",
       "categoria": "Diego",
       "id": 6
+    },
+    {
+      "nombre": "Prueba9",
+      "proveedor": "Prueba9",
+      "nit": "847268-8",
+      "direccion": "Prueba9",
+      "codigo_producto": "Prueba9",
+      "marca": "Prueba9",
+      "cantidad_total": "9",
+      "cantidad": "9",
+      "descripcion": "Prueba9",
+      "precio_unitario": "4",
+      "fecha_abastecimiento": "12-7-2021",
+      "categoria": "Prueba9",
+      "id": 7
     }
   ]
 }

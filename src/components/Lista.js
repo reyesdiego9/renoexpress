@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
 import { Modal, Button  } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
-import axios from 'axios'
 import { Link } from "react-router-dom"
 
 
@@ -46,8 +45,7 @@ function Lista() {
 
         api.onreadystatechange =  await function() {
             if(this.status === 200 && this.readyState === 4){
-                let datos = JSON.parse(this.responseText)
-                setData(datos)
+                setData(JSON.parse(this.responseText))
             }
         }
     }

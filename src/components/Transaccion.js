@@ -91,20 +91,21 @@ function Transaccion() {
 
             setprecio(data.props.value.precio_unitario)
             setquantity(data.props.value.cantidad);
-            setventaProducto(prevState => ({
-                ...prevState,
-                "Producto": data.props.value.nombre
-            }))
+            
             console.log(data.props.value.precio_unitario);
         }
 
         const handleQuantity = e => {
             const { name, value } = e.target;
             if(name === "cantidad"){
+                
                 const total = value * parseFloat(precio)
                 settotal(total)
             }
-
+            setventaProducto(prevState => ({
+                ...prevState,
+                [name]: value
+            }))
             console.log(ventaProducto);
         }
 
@@ -161,8 +162,8 @@ function Transaccion() {
                 <div className="contenedor">
                     <Link  to={"/"} className="cancelar">Cancelar</Link>
                     <select onChange={cambiarFormulario} className='seleccionarFormulario'>
-                        <option value='true'>Compra</option>
-                        <option value='false'>Venta</option>
+                        <option value='true'>Venta</option>
+                        <option value='false'>Compra</option>
                     </select>
                     <div className={styles.modal}>
                         <h3>Compra de Producto</h3>
@@ -188,8 +189,8 @@ function Transaccion() {
                 <div className="contenedor">
                     <Link  to={"/"}  className="cancelar">Cancelar</Link>
                     <select onChange={cambiarFormulario} className='seleccionarFormulario'>
-                        <option value='true'>Compra</option>
-                        <option value='false'>Venta</option>
+                        <option value='true'>Venta</option>
+                        <option value='false'>Compra</option>
                     </select>
                     <div className={styles.modal}>
                         <h3>Venta de Producto</h3>
