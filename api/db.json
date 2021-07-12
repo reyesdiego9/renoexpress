@@ -104,6 +104,21 @@
       "fecha_abastecimiento": "12-7-2021",
       "categoria": "Prueba9",
       "id": 7
+    },
+    {
+      "nombre": "PRUEBA19",
+      "proveedor": "PRUEBA19",
+      "nit": "847268-8",
+      "direccion": "PRUEBA19",
+      "codigo_producto": "A50",
+      "marca": "PRUEBA19",
+      "cantidad_total": "50",
+      "cantidad": "50",
+      "descripcion": "PRUEBA19",
+      "precio_unitario": "30",
+      "fecha_abastecimiento": "12-7-2021",
+      "categoria": "PRUEBA19",
+      "id": 8
     }
   ]
 }

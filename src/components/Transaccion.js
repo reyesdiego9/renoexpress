@@ -62,10 +62,17 @@ function Transaccion() {
 
         
         const cargarDatos = async() => {
-            await axios.get("http://localhost:5001/articulos")
-            .then(response => {
-                setData(response.data)
-            })
+            let url = "http://localhost:5001/articulos"
+            const api = new XMLHttpRequest()
+        
+            api.open('GET', url, true)
+            api.send();
+
+            api.onreadystatechange =  await function() {
+                if(this.status === 200 && this.readyState === 4){
+                    setData(JSON.parse(this.responseText))
+                }
+            }
         }
 
         useEffect(() => {
@@ -88,11 +95,12 @@ function Transaccion() {
         }
 
         const precioProducto = (data) => {
-
             setprecio(data.props.value.precio_unitario)
             setquantity(data.props.value.cantidad);
-            
-            console.log(data.props.value.precio_unitario);
+            setventaProducto(prevState => ({
+                ...prevState,
+                "Producto": data.props.value.nombre
+            }))
         }
 
         const handleQuantity = e => {
